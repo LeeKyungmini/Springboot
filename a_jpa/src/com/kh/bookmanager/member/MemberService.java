@@ -1,6 +1,12 @@
 package com.kh.bookmanager.member;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import com.kh.bookmanager.common.code.jpa.JpaTemplate;
 
 //Service 
 //웹어플리케이션의 비지니스로직 작성
@@ -10,45 +16,115 @@ import java.util.List;
 //commit,rollback을 Service 클래스에서 처리
 public class MemberService {
 
+	private MemberRepository memberRepository = new MemberRepository();
+
 	public Member memberAuthenticate(String userId, String password) {
-		// TODO Auto-generated method stub
+
+		EntityManager em = JpaTemplate.createEntityManager();
+		// find() : whghl
+
+		try {
+			Member member = em.find(Member.class, userId);
+			if (member == null)
+				return null;
+			if (member.getPassword().equals(password))
+				return member;
+		} finally {
+			em.close();
+		}
+
 		return null;
 	}
 
-	public Member selectMemberById(String userId) {
-		// TODO Auto-generated method stub
+	public Member findMemberById(String userId) {
+		EntityManager em = JpaTemplate.createEntityManager();
+		Member member = null;
+		
+		try {
+			member = em.find(Member.class, userId);
+			if (member == null)
+				return null;
+			if (member.getUserId().equals(userId))
+				return member;
+		} finally {
+			em.close();
+		}
+
 		return null;
 	}
 
-	public List<Member> selectMemberList() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public List<Member> findAllMember() {
+		EntityManager em = JpaTemplate.createEntityManager();
+		List<Member> members = new ArrayList<>();
+		try {
+			members = memberRepository.findAllMember(em);
+		} finally {
+			em.close();
+		}
+		return members;
 	}
 
-	public int insertMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int persistMember(Member member) {
+		EntityManager em = JpaTemplate.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		int res = 0;
+		tx.begin();
+		
+		try {
+			em.persist(member);
+			tx.commit();
+			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+		
+		return res;
 	}
 
-	public int updateMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modifyMember(Member member) {
+		EntityManager em = JpaTemplate.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		int res = 0;
+		
+		try {
+			em.find(Member.class, member.getUserId())
+					.setPassword(member.getPassword());
+			tx.commit();
+			res = 1;
+		}catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+		return res;
 	}
 
-	public int deleteMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeMember(String userId) {
+		EntityManager em = JpaTemplate.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		int res = 0;
+		
+		tx.begin();
+		
+		try {
+			Member member = em.find(Member.class, userId);
+			em.remove(member);
+			tx.commit();
+			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+		
+		return res;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

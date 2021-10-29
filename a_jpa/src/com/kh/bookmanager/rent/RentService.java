@@ -4,7 +4,7 @@ import java.util.List;
 
 public class RentService {
 
-	public boolean insertRentInfo(String userId, List<String> bkIdxs) {
+	public boolean addRentInfo(String userId, List<String> bkIdxs) {
 		// TODO Auto-generated method stub
 		return false;
 	}

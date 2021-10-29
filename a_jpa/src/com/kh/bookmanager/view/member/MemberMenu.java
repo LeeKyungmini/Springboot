@@ -54,7 +54,7 @@ public class MemberMenu {
 			case 4: //사용자로부터 아이디를 입력받아 해당 회원을 삭제
 					System.out.print("삭제할 아이디를 입력하세요 : ");
 					userId = sc.next();
-					if(memberController.deleteMember(userId) != 0) {
+					if(memberController.removeMember(userId) != 0) {
 						System.out.println("삭제처리가 완료되었습니다.");
 					}else {
 						System.out.println("삭제처리에 실패하였습니다.");

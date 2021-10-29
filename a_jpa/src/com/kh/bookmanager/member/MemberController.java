@@ -17,26 +17,26 @@ public class MemberController {
 	}
 	
 	public Member searchById(String userId) {
-		return memberService.selectMemberById(userId);
+		return memberService.findMemberById(userId);
 	}
 	
 	public List<Member> searchAll(){
-		return memberService.selectMemberList();
+		return memberService.findAllMember();
 	}
 
 	public int join(Member member) {
-		return memberService.insertMember(member);
+		return memberService.persistMember(member);
 	}
 
 	public int modifyPassword(String userId, String password) {
 		Member member = new Member();
 		member.setUserId(userId);
 		member.setPassword(password);
-		return memberService.updateMember(member);
+		return memberService.modifyMember(member);
 	}
 
-	public int deleteMember(String userId) {
-		return memberService.deleteMember(userId);
+	public int removeMember(String userId) {
+		return memberService.removeMember(userId);
 	}
 	
 	

@@ -7,7 +7,7 @@ public class RentController {
 	private RentService rentService = new RentService();
 	
 	public boolean registRent(String userId, List<String> bkIdxs) {
-		return rentService.insertRentInfo(userId, bkIdxs);
+		return rentService.addRentInfo(userId, bkIdxs);
 	}
 
 	public void returnBook(String rbIdx) {

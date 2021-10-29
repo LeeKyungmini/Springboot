@@ -13,7 +13,7 @@
             drop : 테이블 삭제
             none : ddl off (베포시 반드시 세팅)
        -->
-       <property name="hibernate.hbm2ddl.auto" value="create"/>
+       <property name="hibernate.hbm2ddl.auto" value="none"/>
        <property name="hibernate.show_sql" value="true"/>
        <property name="hibernate.format_sql" value="true"/>
    </properties>
