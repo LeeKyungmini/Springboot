@@ -1,10 +1,13 @@
 package com.kh.bookmanager.rent;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,14 +35,20 @@ public class Rent {
 	@JoinColumn(name = "userId")
 	private Member member;
 	
-	@OneToMany(mappedBy = "rent")
-	private List<RentBook> rentBooks;
+	//CasecadeType
+	// PERSIST : PERSIST를 수행할 때 연관엔티티도 함께 수행
+	// REMOVE : 엔티티를 삭제할 떄 연관 엔티티도 함께 삭제
+	// MERGE : 준영속상태의 엔티티를 MERGE 할 때 연관엔티티도 함께 MERGE
+	// DETACH : 영속상태의 엔티티를 준영속 상태로 만들 때 연관엔티티도 함께 수행
+	// ALL : PERSIST + REMOVE + MERGE + DEATACH
 	
-	//rentBook.setRentBooks();
-	//rentBook.setRent(r);
+	
+	//FectcoType.EAGER : Lazy Initialization 설정을 끔
+	@OneToMany(mappedBy = "rent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<RentBook> rentBooks = new ArrayList<RentBook>();
 	
 	@Column(columnDefinition = "date default sysdate")
-	private Date regDate;
+	private LocalDateTime regDate;
 	
 	@Column(columnDefinition = "number default 0")
 	private Boolean isReturn;
@@ -47,7 +56,12 @@ public class Rent {
 	@Column(columnDefinition = "number default 0")
 	private Integer rentBookCnt;
 	
-	
+	public void changeRentBooks(List<RentBook> rentBooks) {
+		this.rentBooks = rentBooks;
+		for (RentBook rentBook : rentBooks) {
+			rentBook.setRent(this);
+		}
+	}
 	
 	
 	

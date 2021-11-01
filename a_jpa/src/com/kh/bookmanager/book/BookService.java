@@ -16,7 +16,7 @@ public class BookService {
 		EntityManager em = JpaTemplate.createEntityManager();
 		List<Book> bookList = new ArrayList<>();
 		try {
-			bookList = bookRepository.selectBookByTitle(em, keyword);
+			bookList = bookRepository.findBookByTitle(em, keyword);
 		} finally {
 			em.close();
 		}
@@ -27,7 +27,7 @@ public class BookService {
 		EntityManager em = JpaTemplate.createEntityManager();
 		List<Book> bookList = new ArrayList<>();
 		try {
-			bookList = bookRepository.selectBookWithRank(em);
+			bookList = bookRepository.findBookWithRank(em);
 		} finally {
 			em.close();
 		}

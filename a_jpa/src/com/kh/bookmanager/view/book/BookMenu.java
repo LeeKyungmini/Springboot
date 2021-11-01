@@ -51,6 +51,7 @@ public class BookMenu {
 
 				System.out.print("\n도서번호를 입력하세요 : ");
 				Long bk_idx = sc.nextLong();
+				sc.nextLine();
 				System.out.print("도서 소개를 입력하세요 : ");
 				String info = sc.next();
 
@@ -68,6 +69,7 @@ public class BookMenu {
 				//도서 삭제에 성공하면 "도서 삭제 성공", 실패하면 "도서 삭제 실패" 출력
 				System.out.print("\n삭제할 도서의 도서번호를 입력하세요 : ");
 				bk_idx = sc.nextLong();
+				sc.nextLine();
 				if (bookController.removeBook(bk_idx) != 0) {
 					System.out.println("\n도서 삭제 성공");
 				} else {
@@ -104,7 +106,7 @@ public class BookMenu {
 				}
 				break;
 			case 2 :
-				System.out.println("대출 건수가 많은 상위 5권의 목록입니다.");
+				System.out.println("대출 건수가 많은 상위 3권의 목록입니다.");
 				bookList = bookController.searchBookWithRank();
 				for (Book book : bookList) {
 					System.out.println(book);
@@ -119,7 +121,7 @@ public class BookMenu {
 	
 	public Book registBook() {
 		Book book = new Book();
-		System.out.println("도서정보를 입력하세요---------------------");
+		System.out.print("도서정보를 입력하세요---------------------");
 		System.out.print("도서 제목 : ");
 		book.setTitle(sc.next());
 		
