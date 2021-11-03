@@ -77,6 +77,37 @@
 <p th:if="${score.avg >= 60}">[[${session.userInfo.userId}]]님 합격하셨습니다.</p>
 <p th:unless="${score.avg >= 60}">[[${session.userInfo.userId}]]님 불합격하셨습니다.</p>
 
+<h3>each / switch case</h3>
+<h4 th:text="|${session.userInfo.userId}의 과목별 학점|"></h4>
+<ul>
+	<!-- map인 경우 탐색결과로 Entry객체가 변수에 담김
+		${var.value} => Entry.getValue()
+	 -->
+	
+	<li th:each="entry : ${score}" th:switch="${entry.value/10}" th:unless=${key=='avg'}>
+		과목명 : [[${key}]] : [[${entry.value}]]점
+		<th:block th:case="${10}">(A++)</th:block>
+		<th:block th:case="${9}">(A)</th:block>
+		<th:block th:case="${8}">(B)</th:block>
+		<th:block th:case="${7}">(C)</th:block>
+		<th:block th:case="${6}">(D)</th:block>
+		<th:block th:case="${*}">(F)</th:block>
+	</li>
+</ul>
+
+<h3>원하는 횟수만큼 반복하는 반복문</h3>
+<div th:each="var,status : ${#numbers.sequence(1,10,2)}" style="border: 1px solid">
+	값 : [[${var}]] <br>
+	status.index : [[${status.index}]] <br>
+	status.count : [[${status.count}]] <br>
+	status.size : [[${status.size}]] <br>
+	status.current : [[${status.current}]] <br>
+	status.even : [[${status.even}]] <br>
+	status.odd : [[${status.odd}]] <br>
+	status.first : [[${status.first}]] <br>
+	status.last : [[${status.last}]] 
+</div>
+
 
 
 </body>
