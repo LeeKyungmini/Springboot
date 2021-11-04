@@ -13,7 +13,7 @@ import com.kh.spring.member.Member;
 
 @Controller
 public class ThymeleafController {
-
+	
 	@GetMapping("thymeleaf/thymeleaf")
 	public void sendDataForThymeleaf(Model model, HttpSession session) {
 		
@@ -24,27 +24,18 @@ public class ThymeleafController {
 		member.setGrade("일반");
 		member.setTell("010-0000-1111");
 		
-		//Map
-		Map<String, Object> commandMap = new LinkedHashMap<>();
+		//Map<String,Object>
+		Map<String,Object> commandMap = new LinkedHashMap();
 		commandMap.put("java", 100);
 		commandMap.put("html", 88);
 		commandMap.put("css", 65);
 		commandMap.put("js", 91);
 		commandMap.put("servlet", 77);
 		commandMap.put("spring", 100);
-		commandMap.put("avg", 87);
+		commandMap.put("avg", 35);
 		
 		model.addAttribute("score", commandMap);
 		model.addAttribute("color", "blue");
 		session.setAttribute("userInfo", member);
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }

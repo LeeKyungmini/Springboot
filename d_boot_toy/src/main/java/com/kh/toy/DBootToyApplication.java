@@ -1,13 +1,13 @@
-package com.kh.spring;
+package com.kh.toy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CBootThymleafApplication {
+public class DBootToyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CBootThymleafApplication.class, args);
+		SpringApplication.run(DBootToyApplication.class, args);
 	}
 
 }

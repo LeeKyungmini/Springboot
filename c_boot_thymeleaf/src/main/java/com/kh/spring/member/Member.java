@@ -1,28 +1,10 @@
 package com.kh.spring.member;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
-//DTO(DATA TRANSFER OBJECT)
-//데이터 전송 객체
-//데이터베이스로부터 얻어 온 데이터를 service(비지니스로직)으로 보낼 때 사용한 객체
-//비지니스 로직을 포함하고 있지 않은, 순수하게 데이터 전송만을 위한 객체
-//getter/setter, equals, hashCode, toString 메서드만을 갖는다.
-
-// *** 참고 
-//	도메인 객체 : 데이터베이스 테이블에서 조회 해온 한 행(row)의 값을 저장하는 용도로 사용하는 객체
-//	DOMAIN OBJECT, VALUE OBJECT(VO), DTO, ENTITY, BEAN
-
-//DTO의 조건 (JAVA BEAN 규약)
-//1. 모든 필드변수는 PRIVATE일 것
-//2. 반드시 기본 생성자가 존재할 것. (매개변수가 있는 생성자가 있더라도, 기본 생성자가 있어야함)
-//3. 모든 필드변수는 GETTER/SETTER 메서드를 가져야 한다.
-
-//오라클 - 자바 타입 매핑
-//CHAR, VARCHAR2 -> String
-//DATE -> java.util.Date, java.sql.Date
-//number -> int, double
-public class Member {
-
+public class Member {	
+	
 	private String userId;
 	private String password;
 	private String email;
@@ -31,82 +13,67 @@ public class Member {
 	private LocalDateTime rentableDate;
 	private LocalDateTime regDate;
 	private Boolean isLeave;
-
-	//우리가 만든 메서드
+	
 	public int printHashCode() {
-		System.out.println("printHashCode 메서드를 호출했습니다.");
+		System.out.println("printHashCode 메서드를 호출하였습니다.");
 		return this.hashCode();
 	}
 	
 	public String getUserId() {
 		return userId;
 	}
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getGrade() {
 		return grade;
 	}
-
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-
 	public String getTell() {
 		return tell;
 	}
-
 	public void setTell(String tell) {
 		this.tell = tell;
 	}
-
 	public LocalDateTime getRentableDate() {
 		return rentableDate;
 	}
-
 	public void setRentableDate(LocalDateTime rentableDate) {
 		this.rentableDate = rentableDate;
 	}
-
 	public LocalDateTime getRegDate() {
 		return regDate;
 	}
-
 	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
-
 	public Boolean getIsLeave() {
 		return isLeave;
 	}
-
 	public void setIsLeave(Boolean isLeave) {
 		this.isLeave = isLeave;
 	}
-
 	@Override
 	public String toString() {
 		return "Member [userId=" + userId + ", password=" + password + ", email=" + email + ", grade=" + grade
 				+ ", tell=" + tell + ", rentableDate=" + rentableDate + ", regDate=" + regDate + ", isLeave=" + isLeave
 				+ "]";
 	}
-
+	
+	
+	
 }

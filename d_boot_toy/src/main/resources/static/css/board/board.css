@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 /* boardForm  */
 .tit_board *{font-size:1.3vw; margin-right:2vw}
 .board-content{padding-top:3vh; height:50vh}
@@ -13,7 +12,8 @@
    min-height:50vh;
 }
 
-info{font-size:1.3vw; border-bottom:1px solid}
+/* board-form */
+.info{font-size:1.3vw; border-bottom:1px solid}
 .info span{padding-right: 3vw;}
 .info li{font-size:0.5vw;}
 

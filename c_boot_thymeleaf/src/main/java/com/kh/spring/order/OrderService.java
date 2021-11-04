@@ -10,15 +10,14 @@ import com.kh.spring.food.Food;
 
 @Service
 public class OrderService {
-	
+
 	public Map<String, Object> order(List<String> foods) {
-		
 		List<Food> orders = foods.stream()
-							.map(e -> Food.createFood(e)).collect(Collectors.toList());
+						.map(e -> Food.createFood(e)).collect(Collectors.toList());
 		
-		int payPrice = orders.stream()
-							.map(e -> e.getPrice()).reduce((a,b) -> a+b).orElse(0);
+		int payPrice = orders.stream().map(e -> e.getPrice()).reduce((a, b) -> a + b).orElse(0);
 		
 		return Map.of("orders", orders, "payPrice", payPrice);
 	}
+
 }
