@@ -1,6 +1,5 @@
 package com.kh.toy.member;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -31,6 +30,7 @@ public class Member {
 	   @Column(columnDefinition = "date default sysdate")
 	   private LocalDate regDate;
 	   
+	   @Column(columnDefinition = "number default 0")
 	   private Boolean isLeave;
 	   
 	   

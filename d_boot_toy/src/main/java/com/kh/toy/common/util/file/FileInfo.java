@@ -1,6 +1,5 @@
 package com.kh.toy.common.util.file;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -31,6 +30,8 @@ public class FileInfo{
 	
 	@Column(columnDefinition = "date default sysdate")
 	private LocalDate regDate;
+	
+	@Column(columnDefinition = "number default 0")
 	private Boolean isDel;
 	
 	public String getLink() {

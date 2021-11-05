@@ -24,8 +24,13 @@ public class MemberService {
 	private final RestTemplate http;
 	private final PasswordEncoder passwordEncoder;
 
-	public void insertMember(JoinForm form) {
-
+	@Transactional
+	public void persistMember(JoinForm form) {
+		Member member = form.convertToMember();
+		member.setGrade("일반");
+		member.setPassword(passwordEncoder.encode(form.getPassword()));
+		memberRepository.save(member);
+		
 	}
 
 	public Member authenticateUser(Member member) {

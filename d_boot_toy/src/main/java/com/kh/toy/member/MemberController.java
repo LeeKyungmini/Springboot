@@ -116,7 +116,7 @@ public class MemberController {
 			throw new HandlableException(ErrorCode.AUTHENTICATION_FAILED_ERROR);
 		}
 		
-		memberService.insertMember(form);
+		memberService.persistMember(form);
 		redirectAttrs.addFlashAttribute("message", "회원가입을 환영합니다. 로그인 해주세요");
 		session.removeAttribute("persistToken");
 		session.removeAttribute("persistUser");
