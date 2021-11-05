@@ -42,14 +42,14 @@ public class BoardController {
 		logger.debug("mf.isEmpty : " + files.get(0).isEmpty());
 		
 		board.setMember(member);
-		boardService.insertBoard(files, board);
+		boardService.persistBoard(files, board);
 		return "redirect:/";
 	}
 	
 	@GetMapping("board-detail")
-	public void boardDetail(Model model, String bdIdx) {
-		Map<String,Object> commandMap = boardService.selectBoardByIdx(bdIdx);
-		model.addAllAttributes(commandMap);
+	public void boardDetail(Model model, Long bdIdx) {
+		Board board = boardService.findBoardById(bdIdx);
+		model.addAttribute("board", board);
 	}
 	
 	

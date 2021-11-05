@@ -172,12 +172,11 @@ public class MemberController {
 	@GetMapping("id-check")
 	@ResponseBody
 	public String idCheck(String userId) {
-		Member member = memberService.findMemberById(userId);
 		
-		if(member == null) {
-			return "available";
-		}else {
+		if(memberService.existMemberById(userId)) {
 			return "disable";
+		}else {
+			return "available";
 		}
 	}
 	

@@ -34,11 +34,23 @@ public class MemberService {
 	}
 
 	public Member authenticateUser(Member member) {
+		Member memberEntity = memberRepository.findById(member.getUserId())
+								.orElse(null);
+		
+		if(memberEntity == null) return null;
+		
+		if(passwordEncoder.matches(member.getPassword(), memberEntity.getPassword())) {
+			
+			return memberEntity;
+		}
+				
+				
+			
 		return null;
 	}
 
-	public Member findMemberById(String userId) {
-		return memberRepository.findById(userId).orElse(null);
+	public boolean existMemberById(String userId) {
+		return memberRepository.existsById(userId);
 	}
 
 	public void authenticateByEmail(JoinForm form, String token) {

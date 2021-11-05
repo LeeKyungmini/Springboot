@@ -29,9 +29,8 @@ import lombok.Data;
 public class Board {
 	
 	@Id
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@GeneratedValue(generator = "uuid")
-	private String bdIdx;
+	@GeneratedValue
+	private Long bdIdx;
 	
 	@Column(columnDefinition = "date default sysdate")
 	private LocalDate regDate;
@@ -47,7 +46,7 @@ public class Board {
 	private Member member;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<FileInfo> files = new ArrayList<FileInfo>();
+	private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
 }
 
 
