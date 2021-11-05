@@ -1,8 +1,9 @@
 /**
  * 
  */
-
-let urlEncoder = paramObj =>{
+ 
+ let urlEncoder = paramObj =>{
+	
 	let arr = [];
 	
 	for(key in paramObj){
@@ -11,5 +12,4 @@ let urlEncoder = paramObj =>{
 	}
 	
 	return arr.join('&');
-	
 }
