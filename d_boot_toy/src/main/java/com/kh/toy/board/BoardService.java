@@ -2,8 +2,10 @@ package com.kh.toy.board;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +40,12 @@ public class BoardService{
 	public Board findBoardById(Long bdIdx) {
 		return boardRepository.findById(bdIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.UNAUTHORIZED_PAGE_ERROR));
+	}
+
+	public List<Board> findBoardsByPage(int page) {
+		Page<Board> boardList = boardRepository
+				.findAll(PageRequest.of(page-1, 5, Direction.DESC, "bdIdx"));
+		return boardList.getContent();
 	}
 	
 	

@@ -21,11 +21,13 @@ import com.kh.toy.common.util.file.FileInfo;
 import com.kh.toy.member.Member;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@ToString(exclude = "fileInfos")
 public class Board {
 	
 	@Id

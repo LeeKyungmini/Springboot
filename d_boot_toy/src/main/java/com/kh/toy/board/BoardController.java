@@ -1,7 +1,6 @@
 package com.kh.toy.board;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +51,14 @@ public class BoardController {
 		model.addAttribute("board", board);
 	}
 	
-	
+	@GetMapping("board-list")
+	public void boardList(Model model
+				, @RequestParam(required = false, defaultValue = "1")
+				 int page) {
+		
+		List<Board> boardList = boardService.findBoardsByPage(page);
+		model.addAttribute("boardList", boardList);
+	}
 	
 
 	

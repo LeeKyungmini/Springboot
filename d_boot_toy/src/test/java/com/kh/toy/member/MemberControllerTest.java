@@ -51,8 +51,8 @@ public class MemberControllerTest {
    public void joinImpl() throws Exception{
       
       JoinForm joinForm = new JoinForm();
-      joinForm.setUserId("test123");
-      joinForm.setPassword("123qwe!@#");
+      joinForm.setUserId("test");
+      joinForm.setPassword("test123!@#");
       joinForm.setEmail("alssgo70051@gmail.com");
       joinForm.setTell("010-2222-3333");
       
