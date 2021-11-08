@@ -67,7 +67,11 @@ public class FileUtil {
 		return fileInfo;
 	}
 	
-	
+	public void deleteFile(String path) {
+		File file = new File(path);
+		System.out.println(file);
+		file.delete();
+	}
 	
 	
 	

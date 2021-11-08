@@ -54,7 +54,7 @@ public class MemberControllerTest {
 			JoinForm joinForm = new JoinForm();
 			joinForm.setUserId("test" + i);
 			joinForm.setPassword("123qwe!@#");
-			joinForm.setEmail("alssgo70051@gmail.com");
+			joinForm.setEmail("alssgo70051@naver.com");
 			joinForm.setTell("010-2222-3333");
 			
 			mockMvc.perform(get("/member/join-impl/1234")

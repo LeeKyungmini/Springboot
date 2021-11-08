@@ -2,6 +2,7 @@ package com.kh.toy.board;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,7 +42,7 @@ public class BoardControllerTest {
 			mockMvc.perform(multipart("/board/upload")
 				.file(file1)
 				.contentType(MediaType.MULTIPART_FORM_DATA)
-				.param("title", "게시글 업로드" + i)
+				.param("title", "게시글 업로드 " + i)
 				.param("content", "본문")
 				.sessionAttr("authentication", member))
 			.andExpect(status().is3xxRedirection())
@@ -69,7 +70,22 @@ public class BoardControllerTest {
 	}
 	
 	
-	
+	@Test
+	@DisplayName("게시글 수정")
+	public void modifyBoard() throws Exception{
+		
+		MockMultipartFile file1 = 
+				new MockMultipartFile("files","OFN.txt",null,"firstFile".getBytes());
+		
+		mockMvc.perform(multipart("/board/modify")
+				.file(file1)
+				.param("bdIdx", "9")
+				.param("title", "수정된 제목")
+				.param("content", "수정된 내용")
+				.param("removeFlIdx", "10")
+				.contentType(MediaType.MULTIPART_FORM_DATA))
+		.andDo(print());
+	}
 	
 	
 	

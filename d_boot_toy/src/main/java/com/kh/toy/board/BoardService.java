@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +20,11 @@ import com.kh.toy.common.util.file.FileUtil;
 import com.kh.toy.common.util.paging.Paging;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BoardService{
 	
 	private final BoardRepository boardRepository;
@@ -63,6 +66,39 @@ public class BoardService{
 		
 		return Map.of("boardList", boardList, "paging", paging);
 	}
+
+	@Transactional
+	public void modifyBoard(Board board, List<MultipartFile> files, List<Long> removeFlIdx) {
+		
+		Board boardEntity = boardRepository.findById(board.getBdIdx())
+											.orElseThrow(() -> new HandlableException(ErrorCode.REDIRECT));
+		
+		FileUtil util = new FileUtil();
+		boardEntity.setTitle(board.getTitle());
+		boardEntity.setContent(board.getContent());
+		
+		boardEntity.getFileInfos().removeIf(e -> {
+			if(removeFlIdx.contains(e.getFlIdx())) {
+				util.deleteFile(e.getDownloadPath());
+				return true;
+			}
+			return false;
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
