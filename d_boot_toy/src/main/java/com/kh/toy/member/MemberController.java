@@ -78,7 +78,7 @@ public class MemberController {
 
 	@GetMapping("join")
 	public void joinForm(Model model) {
-		model.addAttribute(new JoinForm()).addAttribute(new JoinForm());
+		model.addAttribute(new JoinForm());
 	}
 	
 	@PostMapping("join")
@@ -88,7 +88,6 @@ public class MemberController {
 			, HttpSession session
 			, RedirectAttributes redirectAttr
 			) {
-		
 		
 		if(errors.hasErrors()) {
 			return "member/join";
@@ -149,7 +148,6 @@ public class MemberController {
 		}
 		
 		session.setAttribute("authentication", certifiedUser);
-		logger.debug(certifiedUser.toString());
 		return "redirect:/member/mypage";
 	}
 	
@@ -172,8 +170,7 @@ public class MemberController {
 	@GetMapping("id-check")
 	@ResponseBody
 	public String idCheck(String userId) {
-		
-		if(memberService.existMemberById(userId)) {
+		if(memberService.existsMemberById(userId)) {
 			return "disable";
 		}else {
 			return "available";

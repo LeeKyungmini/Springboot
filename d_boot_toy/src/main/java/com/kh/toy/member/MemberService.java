@@ -30,7 +30,6 @@ public class MemberService {
 		member.setGrade("일반");
 		member.setPassword(passwordEncoder.encode(form.getPassword()));
 		memberRepository.save(member);
-		
 	}
 
 	public Member authenticateUser(Member member) {
@@ -38,18 +37,14 @@ public class MemberService {
 								.orElse(null);
 		
 		if(memberEntity == null) return null;
-		
 		if(passwordEncoder.matches(member.getPassword(), memberEntity.getPassword())) {
-			
 			return memberEntity;
 		}
-				
-				
-			
+		
 		return null;
 	}
 
-	public boolean existMemberById(String userId) {
+	public boolean existsMemberById(String userId) {
 		return memberRepository.existsById(userId);
 	}
 

@@ -1,7 +1,9 @@
 package com.kh.toy.board;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +16,7 @@ import com.kh.toy.common.code.ErrorCode;
 import com.kh.toy.common.exception.HandlableException;
 import com.kh.toy.common.util.file.FileInfo;
 import com.kh.toy.common.util.file.FileUtil;
+import com.kh.toy.common.util.paging.Paging;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,13 +42,26 @@ public class BoardService{
 
 	public Board findBoardById(Long bdIdx) {
 		return boardRepository.findById(bdIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.UNAUTHORIZED_PAGE_ERROR));
+							  .orElseThrow(() -> new HandlableException(ErrorCode.UNAUTHORIZED_PAGE_ERROR));
 	}
 
-	public List<Board> findBoardsByPage(int page) {
+	public Map<String, Object> findBoardsByPage(int page) {
+		//PageRequest는 페이지를 0부터 시작한다... 리얼 개발자 새끼들...
+		int cntPerPage = 5;
+		
 		Page<Board> boardList = boardRepository
-				.findAll(PageRequest.of(page-1, 5, Direction.DESC, "bdIdx"));
-		return boardList.getContent();
+								.findAll(PageRequest.of(page-1, cntPerPage, Direction.DESC, "bdIdx"));
+		
+		Paging paging = Paging.builder()
+					.url("/board/board-list")
+					.blockCnt(5)
+					.cntPerPage(cntPerPage)
+					.currentPage(page)
+					.total((int)boardRepository.count())
+					.build();
+		
+		
+		return Map.of("boardList", boardList, "paging", paging);
 	}
 	
 	

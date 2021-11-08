@@ -7,7 +7,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 //@Configuration 이 선언된 클래스에서 @Bean이 선언된 메서드가 반환하는 객체는 ApplicationContext에 등록된다.

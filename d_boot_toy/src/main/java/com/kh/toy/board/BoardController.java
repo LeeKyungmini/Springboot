@@ -1,6 +1,7 @@
 package com.kh.toy.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +36,6 @@ public class BoardController {
 				, Board board
 					
 			) {
-
-		logger.debug("filesSize : " + files.size());
-		logger.debug("files.0" + files.get(0));
-		logger.debug("mf.isEmpty : " + files.get(0).isEmpty());
 		
 		board.setMember(member);
 		boardService.persistBoard(files, board);
@@ -53,11 +50,11 @@ public class BoardController {
 	
 	@GetMapping("board-list")
 	public void boardList(Model model
-				, @RequestParam(required = false, defaultValue = "1")
-				 int page) {
+						, @RequestParam(required = false, defaultValue = "1") 
+						  int page) {
 		
-		List<Board> boardList = boardService.findBoardsByPage(page);
-		model.addAttribute("boardList", boardList);
+		Map<String, Object> commandMap = boardService.findBoardsByPage(page);
+		model.addAllAttributes(commandMap);
 	}
 	
 

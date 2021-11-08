@@ -21,61 +21,61 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class BoardControllerTest {
-   
-   @Autowired
-   private MockMvc mockMvc;
+	
+	@Autowired
+	private MockMvc mockMvc;
 
-   @Test
-   @DisplayName("게시글 업로드")
-   public void uploadBoard() throws Exception{
-      
-      MockMultipartFile file1 = 
-            new MockMultipartFile("files","OFN.txt",null,"firstFile".getBytes());
-      MockMultipartFile file2 = 
-            new MockMultipartFile("files","OFN2.txt",null,"secondFile".getBytes());
-      
-      Member member = new Member();
-      member.setUserId("test");
-      
-      for(int i = 0;  i < 30; i++) {
-         mockMvc.perform(multipart("/board/upload")
-            .file(file1)
-            .contentType(MediaType.MULTIPART_FORM_DATA)
-            .param("title", "게시글 업로드 " + (i+1))
-            .param("content", "본문")
-            .sessionAttr("authentication", member))
-         .andExpect(status().is3xxRedirection())
-         .andDo(print());
-      }
-   }
-   
-   @Test
-   @DisplayName("게시글 조회")
-   public void boardDetail() throws Exception{
-      mockMvc.perform(get("/board/board-detail")
-            .param("bdIdx", "4"))
-      .andExpect(status().isOk())
-      .andDo(print());
-   }
-   
-   @Test
-   @DisplayName("게시글 목록")
-   public void boardList() throws Exception{
-      
-      mockMvc.perform(get("/board/board-list")
-            .param("page", "2"))
-      .andExpect(status().isOk())
-      .andDo(print());
-   }
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+	@Test
+	@DisplayName("게시글 업로드")
+	public void uploadBoard() throws Exception{
+		
+		MockMultipartFile file1 = 
+				new MockMultipartFile("files","OFN.txt",null,"firstFile".getBytes());
+		MockMultipartFile file2 = 
+				new MockMultipartFile("files","OFN2.txt",null,"secondFile".getBytes());
+		
+		Member member = new Member();
+		member.setUserId("test");
+		
+		for(int i = 0;  i < 30; i++) {
+			mockMvc.perform(multipart("/board/upload")
+				.file(file1)
+				.contentType(MediaType.MULTIPART_FORM_DATA)
+				.param("title", "게시글 업로드" + i)
+				.param("content", "본문")
+				.sessionAttr("authentication", member))
+			.andExpect(status().is3xxRedirection())
+			.andDo(print());
+		}
+	}
+	
+	@Test
+	@DisplayName("게시글 조회")
+	public void boardDetail() throws Exception{
+		mockMvc.perform(get("/board/board-detail")
+				.param("bdIdx", "4"))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	@Test
+	@DisplayName("게시글 목록")
+	public void boardList() throws Exception{
+		
+		mockMvc.perform(get("/board/board-list")
+				.param("page", "2"))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
