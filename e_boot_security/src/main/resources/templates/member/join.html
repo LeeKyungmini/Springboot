@@ -37,7 +37,7 @@ input[type=submit]{
 <body>
 <h1>회원 가입 양식</h1>
     <form th:object="${joinForm}"
-    	action="/member/join" method="post" id="frm_join" >
+    	th:action="@{/member/join}" method="post" id="frm_join" >
      <table border="1">
         <tr>
            <td>ID : </td>

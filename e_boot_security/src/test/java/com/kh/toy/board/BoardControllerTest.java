@@ -42,7 +42,7 @@ public class BoardControllerTest {
 			mockMvc.perform(multipart("/board/upload")
 				.file(file1)
 				.contentType(MediaType.MULTIPART_FORM_DATA)
-				.param("title", i + "[[트랜잭션테스트]]" + i)
+				.param("title", "게시글 등록" + i)
 				.param("content", "본문")
 				.sessionAttr("authentication", member))
 			.andExpect(status().is3xxRedirection())
